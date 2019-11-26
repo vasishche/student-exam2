@@ -9,4 +9,8 @@ pipeline {
     }
   }
 }
+node {
+    checkout scm
+    def customImage = docker.build("webapp:${env.BUILD_ID}")
+}
 
