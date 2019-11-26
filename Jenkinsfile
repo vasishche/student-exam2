@@ -9,8 +9,13 @@ pipeline {
     }
   }
 }
+
 node {
     checkout scm
-    def customImage = docker.build("webapp:${env.BUILD_ID}")
+    def customImage = docker.build("vashche/epamexam:webapp-${env.BUILD_ID}")
+
+    docker.withRegistry('','3e74743f-50bd-4816-a4b8-ee2914aa9282') {
+        customImage.push()
+    }
 }
 
